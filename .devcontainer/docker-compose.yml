@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  workspace:
+    container_name: ${APP_NAME}.workspace
+    env_file:
+      - .env
+    build:
+      context: ./
+      args:
+        # Dockerfile内でARGしている変数に.envに定義した値を代入。
+        - ubuntu_version=${UBUNTU_VERSION}
+        - timezone=${TIMEZONE}
+        - port_web_server=${PORT_WEB_SERVER}
+    tty: true
+    volumes:
+      - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
+      - ${VSCODE_EXTENSION_PATH}/vscode-server:/root/.vscode-server/extensions
+      - ${VSCODE_EXTENSION_PATH}/vscode-server-insiders:/root/.vscode-server-insiders/extensions
+    # web-serverとして動作させるためにportを指定。
+    #ports:
+    #  - "$PORT_WEB_SERVER:$PORT_WEB_SERVER"
