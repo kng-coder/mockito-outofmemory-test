@@ -1,1 +1,6 @@
 # mockito-outofmemory-test
+
+JUnitのテストコードにおける、Mockitoの使い方によるメモリ消費量を検証するコード群です。
+
+vscodeのdevcontainerを用いて検証環境の構築を行っています。
+本リポジトリをローカルにクローンし、そのフォルダをvscodeで開けば、Docker上に環境が構築されます。

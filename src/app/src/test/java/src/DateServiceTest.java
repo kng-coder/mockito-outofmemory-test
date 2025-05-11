@@ -3,22 +3,33 @@
  */
 package src;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.withSettings;
 
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootTest
 class DateServiceTest {
 
+    @TestConfiguration
+    public static class TestConf {
+        @Bean
+        public DateUtil dateUtil() {
+            return mock(DateUtil.class, withSettings().stubOnly());
+        }
+    }
+
     @Autowired
     private DateService dateService;
 
-    @MockitoBean
+    @Autowired
     private DateUtil dateUtil;
 
     @Test
